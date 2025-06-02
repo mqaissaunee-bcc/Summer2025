@@ -1,0 +1,24 @@
+ <div style="font-family: sans-serif; max-width: 600px;">
+  <p><strong>📅 Summer Course Progress</strong></p>
+  <div id="progress-text"></div>
+  <div style="background-color: #ddd; width: 100%; height: 25px; border-radius: 5px;">
+    <div id="progress-bar" style="background-color: #4caf50; height: 100%; border-radius: 5px;"></div>
+  </div>
+</div>
+
+<script>
+  // Correct year: 2025
+  const startDate = Date.UTC(2025, 4, 30); // May 30, 2025
+  const endDate = Date.UTC(2025, 7, 11);   // August 11, 2025
+  const today = new Date();
+  const todayUTC = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
+
+  const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+  const elapsedDays = Math.max(0, Math.min(totalDays, Math.floor((todayUTC - startDate) / (1000 * 60 * 60 * 24)) + 1));
+  const percentComplete = ((elapsedDays / totalDays) * 100).toFixed(1);
+
+  document.getElementById("progress-text").innerText =
+    `Day ${elapsedDays} of ${totalDays} (${percentComplete}%)`;
+
+  document.getElementById("progress-bar").style.width = percentComplete + "%";
+</script>
